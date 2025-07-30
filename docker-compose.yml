@@ -20,8 +20,6 @@ services:
     command: bash init.sh
     environment:
       - SHELL=/bin/bash
-      - FRAPPE_PRODUCTION=1
-      - NODE_ENV=production
     working_dir: /home/frappe
     ports:
       - 8090:8000

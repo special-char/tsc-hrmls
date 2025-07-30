@@ -3,7 +3,7 @@
 if [ -d "/home/frappe/frappe-bench/apps/frappe" ]; then
     echo "Bench already exists, skipping init"
     cd frappe-bench
-    bench start --production
+    bench start
 else
     echo "Creating new bench..."
 fi
@@ -34,18 +34,9 @@ bench new-site hrms.localhost \
 --no-mariadb-socket
 
 bench --site hrms.localhost install-app hrms
-# Disable developer mode for production
-bench --site hrms.localhost set-config developer_mode 0
-bench --site hrms.localhost set-config maintenance_mode 0
-bench --site hrms.localhost set-config allow_cors "*"
+bench --site hrms.localhost set-config developer_mode 1
 bench --site hrms.localhost enable-scheduler
 bench --site hrms.localhost clear-cache
 bench use hrms.localhost
 
-# Build assets for production
-bench build --app frappe
-bench build --app erpnext
-bench build --app hrms
-
-# Start in production mode
-bench start --production
+bench start
