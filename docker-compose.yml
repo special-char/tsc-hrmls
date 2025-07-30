@@ -24,6 +24,8 @@ services:
     ports:
       - 8090:8000
       - 9090:9000
+    volumes:
+      - ./init.sh:/home/frappe/init.sh
 
 volumes:
   mariadb-data:
