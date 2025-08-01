@@ -125,7 +125,7 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
     ports:
-      - "8081:8080"
+      - "8082:8080"
     labels:
       # Coolify labels for domain management
       - "coolify.managed=true"
@@ -134,7 +134,7 @@ services:
       # Add your domain here
       - "traefik.http.routers.erpnext.rule=Host(`hr.thespecialcharacter.com`)"
       - "traefik.http.routers.erpnext.tls.certresolver=letsencrypt"
-      - "traefik.http.services.erpnext.loadbalancer.server.port=8081"
+      - "traefik.http.services.erpnext.loadbalancer.server.port=8082"
       - "traefik.enable=true"
 
   queue-long:
