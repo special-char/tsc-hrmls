@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend:
-    image: frappe/erpnext:v15.72.1
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -18,7 +18,7 @@ services:
       MARIADB_ROOT_PASSWORD: admin
 
   configurator:
-    image: frappe/erpnext:v15.72.1
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -47,7 +47,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   create-site:
-    image: frappe/erpnext:v15.72.1
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -102,7 +102,7 @@ services:
       - db-data:/var/lib/mysql
 
   frontend:
-    image: frappe/erpnext:v15.72.1
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     depends_on:
@@ -125,10 +125,20 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
     ports:
-      - "8080:8080"
+      - "8081:8080"
+    labels:
+      # Coolify labels for domain management
+      - "coolify.managed=true"
+      - "coolify.version=4"
+      - "coolify.name=erpnext-frontend"
+      # Add your domain here
+      - "traefik.http.routers.erpnext.rule=Host(`hr.thespecialcharacter.com`)"
+      - "traefik.http.routers.erpnext.tls.certresolver=letsencrypt"
+      - "traefik.http.services.erpnext.loadbalancer.server.port=8081"
+      - "traefik.enable=true"
 
   queue-long:
-    image: frappe/erpnext:v15.72.1
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -144,7 +154,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   queue-short:
-    image: frappe/erpnext:v15.72.1
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -178,7 +188,7 @@ services:
         condition: on-failure
 
   scheduler:
-    image: frappe/erpnext:v15.72.1
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
@@ -192,7 +202,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   websocket:
-    image: frappe/erpnext:v15.72.1
+    image: frappe/erpnext:latest
     networks:
       - frappe_network
     deploy:
