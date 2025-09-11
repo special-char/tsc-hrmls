@@ -135,6 +135,7 @@ services:
       - "coolify.name=erpnext-frontend"
       # Add your domain here
       - "traefik.http.routers.erpnext.rule=Host(`qwsccogk4wcoow8ws480kgso.62.72.3.123.sslip.io`)"
+      - "traefik.http.routers.erpnext.entrypoints=web"
       - "traefik.http.services.erpnext.loadbalancer.server.port=8080"
       - "traefik.enable=true"
 
