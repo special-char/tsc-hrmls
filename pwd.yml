@@ -11,6 +11,7 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+      - apps:/home/frappe/frappe-bench/apps
     environment:
       DB_HOST: db
       DB_PORT: "3306"
@@ -45,6 +46,7 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+      - apps:/home/frappe/frappe-bench/apps
 
   create-site:
     image: frappe/erpnext:latest
@@ -56,6 +58,7 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+      - apps:/home/frappe/frappe-bench/apps
     entrypoint:
       - bash
       - -c
@@ -124,6 +127,7 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+      - apps:/home/frappe/frappe-bench/apps
     labels:
       # Coolify labels for domain management
       - "coolify.managed=true"
@@ -150,6 +154,7 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+      - apps:/home/frappe/frappe-bench/apps
 
   queue-short:
     image: frappe/erpnext:latest
@@ -166,6 +171,7 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+      - apps:/home/frappe/frappe-bench/apps
 
   redis-queue:
     image: redis:6.2-alpine
@@ -198,6 +204,7 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+      - apps:/home/frappe/frappe-bench/apps
 
   websocket:
     image: frappe/erpnext:latest
@@ -212,12 +219,14 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+      - apps:/home/frappe/frappe-bench/apps
 
 volumes:
   db-data:
   redis-queue-data:
   sites:
   logs:
+  apps:
 
 networks:
   frappe_network:
